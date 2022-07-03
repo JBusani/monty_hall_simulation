@@ -2,10 +2,12 @@
 choice vs a 1/3 chance of winning by keeping your original choice. Put these results in either results.txt or results.jpg depending on if it’s text
 based or a screen shot*/
 
-//need three options
-//show when they win and when they don't win
+//rules:
+//1. The host must always open a door that was not picked by the contestant.
+//2. The host must always open a door to reveal a goat and never the car
+//3. The host must always offer the chance to switch between the originally chosen door and the remaining closed door.
 
-//for loop? and keep counters for wins and losses. The wins should be higher.
+
 var numberOfDoors = 3
 var wins, losses;
 
@@ -16,9 +18,8 @@ function randomNumber(){
 }
 
 function assignDoorsPrize(){
-    //splice the prizes to assign them.
+    
     let doors = [];
-
     for(let x = 1; x <= numberOfDoors; x++){
         doors.push('goat');
         
