@@ -11,19 +11,21 @@ var wins, losses;
 
 var prizes = ["goat", "car"];
 
+function randomNumber(){
+    return Math.floor(Math.random() * prizes.length);
+}
 
 function assignDoorsPrize(){
     //splice the prizes to assign them.
     let doors = [];
 
     for(let x = 1; x <= numberOfDoors; x++){
-        doors.push(`door${x}`);
+        doors.push('goat');
+        
     }
-    console.log(doors)
+    doors.splice(randomNumber(), 1, 'car');
+    console.log(doors);
+    return doors;
 }
-
-/*simulation : for(const x = 0; x > 10,000; x++){
-
-}*/
 
 assignDoorsPrize();
