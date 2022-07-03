@@ -10,6 +10,7 @@ based or a screen shot*/
 
 var numberOfDoors = 3
 var wins, losses;
+var doors = [];
 
 var prizes = ["goat", "car"];
 
@@ -18,15 +19,31 @@ function randomNumber(){
 }
 
 function assignDoorsPrize(){
-    
-    let doors = [];
     for(let x = 1; x <= numberOfDoors; x++){
         doors.push('goat');
-        
     }
     doors.splice(randomNumber(), 1, 'car');
     console.log(doors);
-    return doors;
 }
 
-assignDoorsPrize();
+function contestantFirstChoice(){
+    return randomNumber();
+};
+
+function revealTheGoat(){
+    const goat = doors[randomNumber()];
+    if(goat === 'goat'){
+        console.log("found one!", goat);
+        return goat;
+    }
+    revealTheGoat();
+}
+
+
+function runSimulation(){
+    assignDoorsPrize();
+    contestantFirstChoice();
+    revealTheGoat();
+}
+
+runSimulation();
