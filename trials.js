@@ -4,14 +4,13 @@ based or a screen shot*/
 
 //rules:
 //1. The host must always open a door that was not picked by the contestant.
-//2. The host must always open a door to reveal a goat and never the car
+//2. The host must always open a door to reveal a goat and never the car [done]
 //3. The host must always offer the chance to switch between the originally chosen door and the remaining closed door.
 
 
 var numberOfDoors = 3
-var wins, losses;
+var wins, losses, contestantFirstChoice;
 var doors = [];
-
 var prizes = ["goat", "car"];
 
 function randomNumber(){
@@ -26,14 +25,19 @@ function assignDoorsPrize(){
     console.log(doors);
 }
 
-function contestantFirstChoice(){
-    return randomNumber();
+function firstChoice(){
+    const doorNumber = randomNumber();
+    contestantFirstChoice = doors[doorNumber]
+    console.log(`Contestant's first choice is door ${doorNumber + 1}: a ${contestantFirstChoice}`, );
 };
 
 function revealTheGoat(){
-    const goat = doors[randomNumber()];
-    if(goat === 'goat'){
-        console.log("found one!", goat);
+    const doorNumber = randomNumber();
+    const goat = doors[doorNumber];
+    const contestantChoice = contestantFirstChoice;
+
+    if(goat === 'goat' && doors[contestantChoice] !== goat){
+        console.log(`Host opens a door ${doorNumber + 1} to reveal a: `, goat);
         return goat;
     }
     revealTheGoat();
@@ -42,7 +46,7 @@ function revealTheGoat(){
 
 function runSimulation(){
     assignDoorsPrize();
-    contestantFirstChoice();
+    firstChoice();
     revealTheGoat();
 }
 
