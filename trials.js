@@ -25,7 +25,6 @@ const yesOrNo = ['yes', 'no'];
 const numberOfDoors = 3
 let wins, losses, contestantFirstChoiceDoor;
 let doors = [];
-const prizes = ["goat", "car"];
 
 function randomNumber(){
     return Math.floor(Math.random() * doors.length);
@@ -37,7 +36,7 @@ function assignDoorsPrize(){
         doors.push('goat');
     }
     doors.splice(randomNumber(), 1, 'car');
-    console.log(doors);
+    //console.log(doors);
 }
 
 //2. The contestant chooses a door.
@@ -48,7 +47,7 @@ function firstChoice(){
         index: index,
         prize: doors[index]
     };
-    console.log(`Contestant's first choice is door ${index + 1}: a ${doors[contestantFirstChoiceDoor.index]}`);
+    //console.log(`Contestant's first choice is door ${index + 1}: a ${doors[contestantFirstChoiceDoor.index]}`);
     //remove the contestant choice from the array of options
     //this is so the array is to satisfy rule 1 as an impossibility.
     //makes array shorter. maybe faster?
@@ -57,26 +56,26 @@ function firstChoice(){
 
 //3. The host reveals the goat behind another door
 function revealTheGoat(){
-    console.log('remaining door options: ', doors);
+    //console.log('remaining door options: ', doors);
     firstChoice();
     const hostRevealsDoor = () => {
         const hostRevealsDoorNumber = randomNumber();
         const goat = doors[hostRevealsDoorNumber];
         if( goat === 'goat'){
-            console.log(`Host opens to reveal the ${goat} `);
+            //console.log(`Host opens to reveal the ${goat} `);
             return hostRevealsDoorNumber;
         }
         hostRevealsDoor();
     }
 
     hostRevealsDoor();
-    console.log('remaining options : ' , doors);
+    //console.log('remaining options : ' , doors);
 }
 
 //4. Does the contestant want to switch his choice to the other door?
     function switchChoice(){
         const decision = Math.floor(Math.random() * yesOrNo.length);
-        console.log("Would you like to change your choice?", yesOrNo[decision])
+        //console.log("Would you like to change your choice?", yesOrNo[decision])
         return yesOrNo[decision];
     }
 
@@ -86,10 +85,10 @@ function revealTheGoat(){
         const finalChoice = switchChoice();
         if (finalChoice === 'yes'){
             const final = doors[randomNumber()];
-            console.log("Switching to different door. Congrats you won a ", final);
+            //console.log("Switching to different door. Congrats you won a ", final);
             return
         }
-        console.log("Congrats you won a ", contestantFirstChoiceDoor.prize);
+        //console.log("Congrats you won a ", contestantFirstChoiceDoor.prize);
         return contestantFirstChoiceDoor.prize;
     }
 
@@ -98,7 +97,7 @@ function runSimulation(){
 }
 
 function run(numberOfIterations){
-    //let counter = numberOfIterations
+    const sims = numberOfIterations
     losses = 0;
     wins = 0;
     do{
@@ -113,7 +112,7 @@ function run(numberOfIterations){
         numberOfIterations--
     }while(numberOfIterations != 0);
 
-    fs.writeFile('results.txt', `The results are: wins (${wins}) and losses (${losses}) - ${new Date()}`, (err)=>{
+    fs.writeFile('results.txt', `The simulation ran a total of ${sims} times. The results are: wins (${wins}) and losses (${losses}) - ${new Date()}`, (err)=>{
         if (err) throw err;
     })
     console.group("Number of wins: ", wins, "Number of losses ", losses);
@@ -125,4 +124,4 @@ function run(numberOfIterations){
 //please input number of runs you'd like to test within the run parameter ex. run(10000)
 
 
-run(10);
+run(200);
