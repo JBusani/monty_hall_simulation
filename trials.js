@@ -7,11 +7,11 @@ based or a screen shot*/
 //2. The host must always open a door to reveal a goat and never the car [done]
 //3. The host must always offer the chance to switch between the originally chosen door and the remaining closed door.
 
-var yesOrNo = ['yes', 'no'];
-var numberOfDoors = 3
-var wins, losses, contestantFirstChoiceDoor;
-var doors = [];
-var prizes = ["goat", "car"];
+const yesOrNo = ['yes', 'no'];
+const numberOfDoors = 3
+let wins, losses, contestantFirstChoiceDoor;
+let doors = [];
+const prizes = ["goat", "car"];
 
 function randomNumber(){
     return Math.floor(Math.random() * doors.length);
@@ -28,6 +28,7 @@ function assignDoorsPrize(){
 
 //2. The contestant chooses a door.
 function firstChoice(){
+    assignDoorsPrize();
     const index = randomNumber();
     contestantFirstChoiceDoor = {
         index: index,
@@ -43,7 +44,7 @@ function firstChoice(){
 //3. The host reveals the goat behind another door
 function revealTheGoat(){
     console.log('remaining door options: ', doors);
-    
+    firstChoice();
     const hostRevealsDoor = () => {
         const hostRevealsDoorNumber = randomNumber();
         const goat = doors[hostRevealsDoorNumber];
@@ -67,6 +68,7 @@ function revealTheGoat(){
 
 //5. If yes, give them random selection from remaining options
     function returnFinalChoice(){
+        revealTheGoat();
         const finalChoice = switchChoice();
         if (finalChoice === 'yes'){
             const final = doors[randomNumber()];
@@ -78,10 +80,32 @@ function revealTheGoat(){
     }
 
 function runSimulation(){
-    assignDoorsPrize();
-    firstChoice();
-    revealTheGoat();
-    returnFinalChoice();
+   return returnFinalChoice();
 }
 
-runSimulation();
+function run(numberOfIterations){
+    //let counter = numberOfIterations
+    losses = 0;
+    wins = 0;
+    do{
+        if(runSimulation() === 'goat'){
+            losses++;
+        }else{
+            wins++;
+        }
+        doors = [];
+        contestantFirstChoiceDoor = {}
+        
+        numberOfIterations--
+    }while(numberOfIterations != 0);
+
+    console.group("Number of wins: ", wins, "Number of losses ", losses);
+}
+
+
+
+
+//please input number of runs you'd like to test within the run parameter ex. run(10000)
+
+
+run(10);
