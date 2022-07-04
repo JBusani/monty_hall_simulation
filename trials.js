@@ -122,8 +122,6 @@ function run(numberOfIterations){
 }
 
 
-
-
 //please input number of doors and runs you'd like to test below:
 
 let numberOfDoors = 3;
