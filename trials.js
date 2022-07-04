@@ -7,6 +7,20 @@ based or a screen shot*/
 //2. The host must always open a door to reveal a goat and never the car [done]
 //3. The host must always offer the chance to switch between the originally chosen door and the remaining closed door.
 
+/*
+    HOW TO RUN SIMULATION:
+
+        Scroll to the bottom of the file and insert the number of times you want to run the simulation into the run() function.
+
+        for example:
+
+        To run the simulation 10 times, write:
+            run(10);
+        
+*/
+
+const fs = require('fs');
+
 const yesOrNo = ['yes', 'no'];
 const numberOfDoors = 3
 let wins, losses, contestantFirstChoiceDoor;
@@ -99,6 +113,9 @@ function run(numberOfIterations){
         numberOfIterations--
     }while(numberOfIterations != 0);
 
+    fs.writeFile('results.txt', `The results are: wins (${wins}) and losses (${losses}) - ${new Date()}`, (err)=>{
+        if (err) throw err;
+    })
     console.group("Number of wins: ", wins, "Number of losses ", losses);
 }
 
