@@ -9,12 +9,12 @@ based or a screen shot*/
 
 
 var numberOfDoors = 3
-var wins, losses, contestantFirstChoice;
+var wins, losses, contestantFirstChoiceDoor;
 var doors = [];
 var prizes = ["goat", "car"];
 
 function randomNumber(){
-    return Math.floor(Math.random() * prizes.length);
+    return Math.floor(Math.random() * numberOfDoors);
 }
 
 function assignDoorsPrize(){
@@ -27,20 +27,21 @@ function assignDoorsPrize(){
 
 function firstChoice(){
     const doorNumber = randomNumber();
-    contestantFirstChoice = doors[doorNumber]
-    console.log(`Contestant's first choice is door ${doorNumber + 1}: a ${contestantFirstChoice}`, );
+    contestantFirstChoiceDoor = doorNumber;
+    console.log(`Contestant's first choice is door ${doorNumber + 1}: a ${doors[contestantFirstChoiceDoor]}`, );
 };
 
 function revealTheGoat(){
-    const doorNumber = randomNumber();
-    const goat = doors[doorNumber];
-    const contestantChoice = contestantFirstChoice;
+    const contestantChoice = contestantFirstChoiceDoor;
+    //remove the contestant's choice from the available options
+    doors.splice(contestantChoice, 1);
 
-    if(goat === 'goat' && doors[contestantChoice] !== goat){
-        console.log(`Host opens a door ${doorNumber + 1} to reveal a: `, goat);
-        return goat;
+    const hostRevealsGoat = doors[randomNumber()];
+    if(hostRevealsGoat === 'goat'){
+        console.log(hostRevealsGoat);
+        return ``
     }
-    revealTheGoat();
+    
 }
 
 
