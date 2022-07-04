@@ -22,7 +22,7 @@ based or a screen shot*/
 const fs = require('fs');
 
 const yesOrNo = ['yes', 'no'];
-const numberOfDoors = 3
+let numberOfDoors = 5;
 let wins, losses, contestantFirstChoiceDoor;
 let doors = [];
 
@@ -112,7 +112,7 @@ function run(numberOfIterations){
         numberOfIterations--
     }while(numberOfIterations != 0);
 
-    fs.appendFile('results.txt', `The simulation ran a total of ${sims} times. The results are: wins (${wins}) and losses (${losses}) - ${new Date()} \n` , (err)=>{
+    fs.appendFile('results.txt', `The simulation ran a total of ${sims} times with ${numberOfDoors} doors. The results are: wins (${wins}) (${wins / sims}) and losses (${losses}) (${losses / sims}) - ${new Date()} \n` , (err)=>{
         if (err) throw err;
     })
     console.group("Number of wins: ", wins, "Number of losses ", losses);
