@@ -112,7 +112,7 @@ function run(numberOfIterations){
         numberOfIterations--
     }while(numberOfIterations != 0);
 
-    fs.writeFile('results.txt', `The simulation ran a total of ${sims} times. The results are: wins (${wins}) and losses (${losses}) - ${new Date()}`, (err)=>{
+    fs.appendFile('results.txt', `The simulation ran a total of ${sims} times. The results are: wins (${wins}) and losses (${losses}) - ${new Date()} \n` , (err)=>{
         if (err) throw err;
     })
     console.group("Number of wins: ", wins, "Number of losses ", losses);
@@ -124,4 +124,4 @@ function run(numberOfIterations){
 //please input number of runs you'd like to test within the run parameter ex. run(10000)
 
 
-run(200);
+run(10000);
