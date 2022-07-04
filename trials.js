@@ -10,7 +10,11 @@ based or a screen shot*/
 /*
     HOW TO RUN SIMULATION:
 
-        Scroll to the bottom of the file and insert the number of times you want to run the simulation into the run() function.
+        1. Scroll to the bottom of the file.
+        2. Insert the number of doors the contestant will start with in the numberOfDoors variable
+        3. Insert the number of times you want to run the simulation into the run() function.
+        4. Write Node run() in terminal.
+        5. View results in /results.txt.
 
         for example:
 
@@ -22,7 +26,6 @@ based or a screen shot*/
 const fs = require('fs');
 
 const yesOrNo = ['yes', 'no'];
-let numberOfDoors = 5;
 let wins, losses, contestantFirstChoiceDoor;
 let doors = [];
 
@@ -121,7 +124,8 @@ function run(numberOfIterations){
 
 
 
-//please input number of runs you'd like to test within the run parameter ex. run(10000)
+//please input number of doors and runs you'd like to test below:
 
+let numberOfDoors = 3;
 
 run(10000);
